@@ -1,0 +1,27 @@
+.item {
+  margin-left: 10px;
+  transition: color 250ms ease-in-out;
+}
+
+.logo {
+  display: block;
+  margin-left: 10px;
+}
+
+  @media screen and (min-width:768px) {
+    .item{
+    display: block;
+    align-items: center;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+     color: #ffffff;
+}
+    .logo{
+    display: flex;
+   
+      align-items: center;
+
+    font-size: 30px;
+    }
+  }
