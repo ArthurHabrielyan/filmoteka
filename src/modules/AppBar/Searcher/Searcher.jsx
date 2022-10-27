@@ -1,17 +1,28 @@
 import { debounce } from "debounce";
+import { useState } from "react";
 import s from "./Searcher.module.css";
 
-export const Searcher = ({ searchValue, setSearchValue }) => {
+export const Searcher = ({ setSearchValue }) => {
+  const [query, setQuery] = useState("");
+
   const onSearchMovies = (e) => {
     const { value } = e.target;
-    debounce(console.log(value), 200);
-    setSearchValue(value);
+    setQuery(value);
+  };
+
+  const onSubmitSearch = (e) => {
+    e.preventDefault();
+    if (e.keyCode === 13) {
+      setSearchValue(query);
+      return;
+    }
+    setSearchValue(query);
   };
 
   // const onDebounceSearch = debounce(onSearchMovies, 250);
 
   return (
-    <form className={s.searchForm} id="search-form">
+    <form className={s.searchForm} id="search-form" onSubmit={onSubmitSearch}>
       <div className={s.wrap}>
         <input
           className={s.input}
@@ -19,7 +30,7 @@ export const Searcher = ({ searchValue, setSearchValue }) => {
           name="searchQuery"
           autoComplete="off"
           placeholder="Search movies..."
-          value={searchValue}
+          value={query}
           onChange={onSearchMovies}
         />
         <button className={s.searchBtn} type="submit">

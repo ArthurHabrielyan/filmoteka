@@ -12,6 +12,7 @@ const initialState = {
     JSON.parse(localStorage.getItem("queue")) !== null
       ? JSON.parse(localStorage.getItem("queue"))
       : [],
+  message: "",
 };
 
 const localStorageService = new LocalStorageService();
@@ -47,6 +48,9 @@ export const moviesReducer = createSlice({
     },
     [onMovieSearch.fulfilled](state, { payload }) {
       state.movies = payload.results;
+    },
+    [onMovieSearch.rejected](state, { payload }) {
+      console.log(payload);
     },
     [genreList.fulfilled](state, { payload }) {
       state.genreList = payload;
