@@ -1,6 +1,15 @@
+import { debounce } from "debounce";
 import s from "./Searcher.module.css";
 
-export const Searcher = () => {
+export const Searcher = ({ searchValue, setSearchValue }) => {
+  const onSearchMovies = (e) => {
+    const { value } = e.target;
+    debounce(console.log(value), 200);
+    setSearchValue(value);
+  };
+
+  // const onDebounceSearch = debounce(onSearchMovies, 250);
+
   return (
     <form className={s.searchForm} id="search-form">
       <div className={s.wrap}>
@@ -10,6 +19,8 @@ export const Searcher = () => {
           name="searchQuery"
           autoComplete="off"
           placeholder="Search movies..."
+          value={searchValue}
+          onChange={onSearchMovies}
         />
         <button className={s.searchBtn} type="submit">
           <svg

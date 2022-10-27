@@ -1,0 +1,158 @@
+.pagination {
+  margin: 0;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  align-items: center;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+   display: flex;
+  align-items: center;
+  justify-content: center;
+     text-decoration: none;
+}
+
+/* .pagination__list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+.pagination__arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #F7F7F7;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+}
+
+.pagination__arrow-svg {
+  fill: #000000;
+}
+
+.pagination__page {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  border: none;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.pagination__page:hover, 
+.pagination__page:focus{
+    background: #ff6b08;
+}
+
+.pageLink{
+    padding: 18px 18px;
+    color:#000000;
+    text-decoration: none;
+}
+
+.pageLink:hover,
+.pageLink:focus{
+    text-decoration: none;
+     color: #ffffff;
+}
+
+.active{
+    background: #ff6b08;
+}
+
+
+
+.currentPageLink{
+    color: #ffffff;
+}
+
+
+.dots{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000000;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.dots:hover, 
+.dots:focus{
+    background: #ff6b08;
+}
+
+.dotsLink{
+    padding: 18px 18px;
+    color:#000000;
+    text-decoration: none;
+}
+
+.dotsLink:hover,
+.dotsLink:focus{
+    text-decoration: none;
+     color: #ffffff;
+}
+
+.arrowPrevious{
+ display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000000;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.arrowNext{
+ display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000000;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.arrowPrevious:hover, 
+.arrowPrevious:focus{
+    background: #ff6b08;
+}
+
+.arrowNext:hover, 
+.arrowNext:focus{
+    background: #ff6b08;
+
+}
+
+.arrowLink{
+    padding: 18px 18px;
+    color:#000000;
+    text-decoration: none;
+}
+
+.arrowLink:hover,
+.arrowLink:focus{
+    text-decoration: none;
+     color: #ffffff;
+}

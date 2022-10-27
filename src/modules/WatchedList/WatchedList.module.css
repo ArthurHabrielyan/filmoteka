@@ -1,0 +1,135 @@
+a {
+  display: block;
+  margin: 10px auto;
+  flex-basis: calc(100% / 5 - 20px);
+  justify-content: center;
+  border-width: 1px;
+  border-color: gray;
+  text-decoration: none;
+}
+
+
+.gallery{
+  max-width: 320px;
+  margin: 20px auto 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.photoCard{
+  width: 309px;
+  height: 100%;
+  transition: transform 500ms ease-in-out, box-shadow 500ms ease-in-out, border-radius 500ms ease-in-out;
+}
+
+.info {
+  width: 100%;
+
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  color: rgb(44, 45, 46);
+  border-radius: 0 0 5px 5px;
+}
+
+.galleryItem {
+    margin: 0;
+    margin-bottom: 20px;
+    cursor: pointer;
+    width: 274px;
+    padding-bottom: 7px;
+    object-fit: contain;
+}
+
+
+.galleryItem:last-child {
+    margin-bottom: 0px;
+}
+
+
+.image {
+    border-radius: 5px;
+}
+
+.title {
+    margin: 0;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 1.17;
+    color: #000000;
+    text-transform: uppercase;
+    transition: color 0.3s ease-in-out 0s;
+}
+
+.filmInfo {
+    display: flex;
+    align-items: center;
+}
+
+.year{
+    display: inline;
+
+}
+
+.count {
+  display: flex;
+    font-weight: 700;
+    line-height: 14px;
+    color: #ff6b08;
+}
+
+.rate {
+    color: #ffffff;
+    background-color: #ff6b01;
+    padding: 1px 6px;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+.photoCard:hover {
+  box-shadow: 10px 10px 8px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  transform: scale(1.05);
+  
+}
+.slash{
+  padding-left: 3px;
+  padding-right: 3px;
+  font-size: 20px;
+}
+
+.emptyLibrary {
+  margin: 50px auto;
+  padding: 40px;
+  border: 1px solid #ff6b08;
+  border-radius: 50px;
+}
+
+@media screen and (min-width: 768px) {
+    .gallery{ 
+    margin-top: 60px;
+    max-width: 768px;
+    gap: 32px
+    }
+       .galleryItem {
+        margin-bottom: 30px;
+    }
+        .galleryItem:nth-last-child(-n + 2) {
+        margin-bottom: 0px;
+    }
+  }
+
+@media screen and (min-width: 1024px) {
+    .gallery{    
+    max-width: 1024px;
+    gap: 32px 16px;
+    }
+  .galleryItem:nth-last-child(-n + 4) {
+        margin-bottom: 0px;
+    }
+   
+  }

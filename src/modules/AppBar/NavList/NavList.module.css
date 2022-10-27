@@ -2,6 +2,7 @@
 .nav {
     align-items: center;
     display: flex;
+    padding-top: 20px;
 }
 
 .list {
@@ -23,6 +24,13 @@
     line-height: 1.17;
     text-align: center;
     transition: color 250ms ease-in-out;
+    text-decoration: none;
+}
+
+.listLink:hover,
+.listLink:focus{
+    color: #ff6b08;
+    text-decoration: none;
 }
 
 

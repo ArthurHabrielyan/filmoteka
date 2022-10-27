@@ -21,7 +21,7 @@ body{
     .content {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url('../../images/header/header-tablet-bcg.jpg')}
-    .library-content{
+    .libraryContent{
           background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url('../../images/header/library-header-tablet-bcg.jpg');
     }
@@ -34,7 +34,7 @@ body{
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url('../../images/header/header-desktop-bcg.jpg');
   }
-  .library-content{
+  .libraryContent{
       background-size: cover;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url('../../images/header/library-header-desktop-bcg.jpg');
