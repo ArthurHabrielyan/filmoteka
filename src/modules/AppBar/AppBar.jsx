@@ -3,7 +3,12 @@ import { NavList } from "./NavList";
 import { Searcher } from "./Searcher";
 import { LibraryButtons } from "./LibraryButtons";
 import { useLocation } from "react-router-dom";
-export const AppBar = ({ searchValue, setSearchValue }) => {
+export const AppBar = ({
+  searchValue,
+  setSearchValue,
+  onSearchMoviesCb,
+  currentPage,
+}) => {
   const location = useLocation();
   console.log(location.pathname);
   return (
@@ -15,7 +20,11 @@ export const AppBar = ({ searchValue, setSearchValue }) => {
       <div className={s.container}>
         <NavList />
         {location.pathname === "/filmoteka" ? (
-          <Searcher searchValue={searchValue} setSearchValue={setSearchValue} />
+          <Searcher
+            setSearchValue={setSearchValue}
+            onSearchMoviesCb={onSearchMoviesCb}
+            currentPage={currentPage}
+          />
         ) : (
           <LibraryButtons />
         )}

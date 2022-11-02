@@ -1,6 +1,7 @@
 import { onPopularMovies, genreList, onMovieSearch } from "./movies-operations";
 import { createSlice } from "@reduxjs/toolkit";
 import LocalStorageService from "../../services/LocalStorageService";
+
 const initialState = {
   movies: [],
   genreList: [],
@@ -12,7 +13,7 @@ const initialState = {
     JSON.parse(localStorage.getItem("queue")) !== null
       ? JSON.parse(localStorage.getItem("queue"))
       : [],
-  message: "",
+  contentFound: false,
 };
 
 const localStorageService = new LocalStorageService();
@@ -45,12 +46,22 @@ export const moviesReducer = createSlice({
   extraReducers: {
     [onPopularMovies.fulfilled](state, { payload }) {
       state.movies = payload.results;
+      state.contentFound = true;
+    },
+    [onPopularMovies.rejected](state, { payload }) {
+      state.movies = [];
+      state.contentFound = false;
     },
     [onMovieSearch.fulfilled](state, { payload }) {
+      console.log("slice result", payload.results);
+      payload.results.length === 0
+        ? (state.contentFound = false)
+        : (state.contentFound = true);
       state.movies = payload.results;
     },
     [onMovieSearch.rejected](state, { payload }) {
-      console.log(payload);
+      state.movies = [];
+      state.contentFound = false;
     },
     [genreList.fulfilled](state, { payload }) {
       state.genreList = payload;

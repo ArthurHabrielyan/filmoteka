@@ -29,7 +29,6 @@ body{
 
   @media screen and (min-width: 768px) {
     .content{
-    height: 216px;
     background-size: cover;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)),
       url('../../images/header/header-desktop-bcg.jpg');

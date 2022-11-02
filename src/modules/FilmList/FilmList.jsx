@@ -1,19 +1,26 @@
 import s from "./FilmList.module.css";
 
 import { genreList } from "../../redux/movies/movies-operations";
-import { getGenres } from "../../redux/movies/movies-selectors";
+import {
+  getGenres,
+  getMovies,
+  getContent,
+} from "../../redux/movies/movies-selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-
 import { FilmModal } from "../FilmModal";
 import emptyImg from "../../images/header/img_not_found.jpg";
 
-export const FilmList = ({ movies }) => {
+export const FilmList = () => {
   const dispatch = useDispatch();
   const genres = useSelector(getGenres);
+  const movies = useSelector(getMovies);
+  const contentFound = useSelector(getContent);
   const [showModal, setShowModal] = useState(false);
   const [currentFilm, setCurrentFilm] = useState(null);
 
+  console.log("contentFound", contentFound);
+  console.log("movies", movies);
   useEffect(() => {
     dispatch(genreList());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -32,7 +39,7 @@ export const FilmList = ({ movies }) => {
 
   return (
     <section className={s.gallery}>
-      {movies &&
+      {contentFound ? (
         movies.map((movie) => (
           <div
             key={movie.id}
@@ -77,7 +84,10 @@ export const FilmList = ({ movies }) => {
               </div>
             </div>
           </div>
-        ))}
+        ))
+      ) : (
+        <div>No result</div>
+      )}
       {showModal && (
         <FilmModal onDeny={onDeny} movie={currentFilm} genres={genres} />
       )}

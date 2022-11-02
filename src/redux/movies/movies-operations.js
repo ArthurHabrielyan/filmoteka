@@ -20,14 +20,19 @@ export const onPopularMovies = createAsyncThunk(
 
 export const onMovieSearch = createAsyncThunk(
   "movies/searchMovies",
-  async ({ currentPage, searchValue }, { rejectWithValue }) => {
+  async ({ currentPage, query }, { rejectWithValue }) => {
     try {
-      console.log(searchValue);
       const { data } = await axios.get(
-        `/search/movie?api_key=${API_KEY}&query=${searchValue}&page=${currentPage}&include_adult=false`
+        `/search/movie?api_key=${API_KEY}&query=${query}&page=${currentPage}&include_adult=false`
       );
-
-      return data;
+      console.log("data.results.length", data.results.length);
+      if (data.results.length === 0) {
+        console.log("data", data);
+        return rejectWithValue();
+      } else {
+        console.log("else");
+        return data;
+      }
     } catch (error) {
       return rejectWithValue();
     }
@@ -41,6 +46,21 @@ export const genreList = createAsyncThunk(
       const { data } = await axios.get(`/genre/movie/list?api_key=${API_KEY}`);
 
       return data.genres;
+    } catch (error) {
+      return rejectWithValue();
+    }
+  }
+);
+
+export const getMovieTrailer = createAsyncThunk(
+  "movies/getTrailer",
+  async (movieId, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.get(
+        `/movie/${movieId}/videos?api_key=${API_KEY}&language=en-US`
+      );
+
+      return data;
     } catch (error) {
       return rejectWithValue();
     }

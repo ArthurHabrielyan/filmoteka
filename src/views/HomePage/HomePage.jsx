@@ -10,20 +10,33 @@ import { FilmList } from "../../modules/FilmList";
 import ReactPaginate from "react-paginate";
 
 import s from "./HomePage.module.css";
+import { useCallback } from "react";
 export const HomePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
   const [totalPosts, setTotalPosts] = useState(0);
   const moviesState = useSelector(getMovies);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(onPopularMovies(currentPage)).then((data) =>
       setTotalPosts(data.payload.total_pages)
     );
-    !searchValue && dispatch(onPopularMovies(currentPage));
 
-    searchValue && dispatch(onMovieSearch({ currentPage, searchValue }));
-  }, [currentPage, searchValue]);
+    dispatch(onPopularMovies(currentPage));
+  }, []);
+
+  const onSearchMoviesCb = useCallback(
+    (currentPage, query) => {
+      dispatch(onMovieSearch({ currentPage, query }));
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [currentPage, searchValue]
+  );
+
+  // useEffect(() => {
+  //   searchValue && onSearchMoviesCb(currentPage, searchValue);
+  // }, [currentPage, searchValue]);
 
   const handlePageClick = (e) => {
     const selectedPage = e.selected;
@@ -33,8 +46,13 @@ export const HomePage = () => {
 
   return (
     <>
-      <AppBar searchValue={searchValue} setSearchValue={setSearchValue} />
-      <FilmList movies={moviesState} />
+      <AppBar
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        onSearchMoviesCb={onSearchMoviesCb}
+        currentPage={currentPage}
+      />
+      <FilmList />
       <ReactPaginate
         previousLabel={"<"}
         previousClassName={s.arrowPrevious}

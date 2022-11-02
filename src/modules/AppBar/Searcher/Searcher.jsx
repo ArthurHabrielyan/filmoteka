@@ -1,8 +1,9 @@
-import { debounce } from "debounce";
-import { useState } from "react";
 import s from "./Searcher.module.css";
 
-export const Searcher = ({ setSearchValue }) => {
+import { useState } from "react";
+import { getMovies } from "../../../redux/movies/movies-selectors";
+
+export const Searcher = ({ setSearchValue, onSearchMoviesCb, currentPage }) => {
   const [query, setQuery] = useState("");
 
   const onSearchMovies = (e) => {
@@ -14,9 +15,13 @@ export const Searcher = ({ setSearchValue }) => {
     e.preventDefault();
     if (e.keyCode === 13) {
       setSearchValue(query);
+      console.log(query);
+      onSearchMoviesCb(currentPage, query);
       return;
     }
+    console.log(query);
     setSearchValue(query);
+    onSearchMoviesCb(currentPage, query);
   };
 
   // const onDebounceSearch = debounce(onSearchMovies, 250);
@@ -56,7 +61,12 @@ export const Searcher = ({ setSearchValue }) => {
             />
           </svg>
         </button>
-        <div className={s.emptyResult}></div>
+        {getMovies.length === 0 && (
+          <div className={s.emptyResult}>
+            Search result not successful. Enter the correct movie name and try
+            again.
+          </div>
+        )}
       </div>
     </form>
   );
