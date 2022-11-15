@@ -22,17 +22,15 @@ export const onMovieSearch = createAsyncThunk(
   "movies/searchMovies",
   async ({ currentPage, query }, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(
+      const response = await axios.get(
         `/search/movie?api_key=${API_KEY}&query=${query}&page=${currentPage}&include_adult=false`
       );
-      console.log("data.results.length", data.results.length);
-      if (data.results.length === 0) {
-        console.log("data", data);
-        return rejectWithValue();
-      } else {
-        console.log("else");
-        return data;
+
+      if (response.data.results.length === 0) {
+        console.log("Rejected");
+        return rejectWithValue(response.status);
       }
+      return response;
     } catch (error) {
       return rejectWithValue();
     }

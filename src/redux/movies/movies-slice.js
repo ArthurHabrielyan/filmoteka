@@ -49,18 +49,19 @@ export const moviesReducer = createSlice({
       state.contentFound = true;
     },
     [onPopularMovies.rejected](state, { payload }) {
-      state.movies = [];
       state.contentFound = false;
     },
+    [onMovieSearch.pending](state, { payload }) {
+      state.loading = true;
+    },
     [onMovieSearch.fulfilled](state, { payload }) {
-      console.log("slice result", payload.results);
-      payload.results.length === 0
-        ? (state.contentFound = false)
-        : (state.contentFound = true);
-      state.movies = payload.results;
+      state.loading = false;
+      state.movies = payload.data.results;
+      state.contentFound = true;
     },
     [onMovieSearch.rejected](state, { payload }) {
       state.movies = [];
+      state.loading = false;
       state.contentFound = false;
     },
     [genreList.fulfilled](state, { payload }) {

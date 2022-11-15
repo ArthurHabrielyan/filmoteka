@@ -8,9 +8,10 @@ export const AppBar = ({
   setSearchValue,
   onSearchMoviesCb,
   currentPage,
+  setEmptyResult,
 }) => {
   const location = useLocation();
-  console.log(location.pathname);
+
   return (
     <div
       className={
@@ -21,9 +22,11 @@ export const AppBar = ({
         <NavList />
         {location.pathname === "/filmoteka" ? (
           <Searcher
+            searchValue={searchValue}
             setSearchValue={setSearchValue}
             onSearchMoviesCb={onSearchMoviesCb}
             currentPage={currentPage}
+            setEmptyResult={setEmptyResult}
           />
         ) : (
           <LibraryButtons />

@@ -1,27 +1,39 @@
 import s from "./Searcher.module.css";
 
 import { useState } from "react";
-import { getMovies } from "../../../redux/movies/movies-selectors";
+import { getMovies, getContent } from "../../../redux/movies/movies-selectors";
+import { useSelector } from "react-redux";
 
-export const Searcher = ({ setSearchValue, onSearchMoviesCb, currentPage }) => {
+import { useKeyPress } from "../../../hooks/useKeyPress";
+
+export const Searcher = ({
+  searchValue,
+  setSearchValue,
+  onSearchMoviesCb,
+  currentPage,
+  setEmptyResult,
+}) => {
   const [query, setQuery] = useState("");
+  const keyEnter = useKeyPress("Enter");
+
+  const onSubmitSearch = (e) => {
+    e.preventDefault();
+    if (keyEnter && query) {
+      setSearchValue(query);
+      onSearchMoviesCb(currentPage, query);
+      return;
+    }
+
+    if (query) {
+      setSearchValue(query);
+      onSearchMoviesCb(currentPage, query);
+      return;
+    }
+  };
 
   const onSearchMovies = (e) => {
     const { value } = e.target;
     setQuery(value);
-  };
-
-  const onSubmitSearch = (e) => {
-    e.preventDefault();
-    if (e.keyCode === 13) {
-      setSearchValue(query);
-      console.log(query);
-      onSearchMoviesCb(currentPage, query);
-      return;
-    }
-    console.log(query);
-    setSearchValue(query);
-    onSearchMoviesCb(currentPage, query);
   };
 
   // const onDebounceSearch = debounce(onSearchMovies, 250);
@@ -61,12 +73,6 @@ export const Searcher = ({ setSearchValue, onSearchMoviesCb, currentPage }) => {
             />
           </svg>
         </button>
-        {getMovies.length === 0 && (
-          <div className={s.emptyResult}>
-            Search result not successful. Enter the correct movie name and try
-            again.
-          </div>
-        )}
       </div>
     </form>
   );
