@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 export const useKeyPress = (keyTarget) => {
+  // eslint-disable-next-line no-unused-vars
   const [isKeyPressed, setIsKeyPressed] = useState(false);
 
   const downHandler = ({ key }) => {
