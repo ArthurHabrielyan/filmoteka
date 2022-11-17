@@ -1,18 +1,9 @@
 import s from "./Searcher.module.css";
 
 import { useState } from "react";
-import { getMovies, getContent } from "../../../redux/movies/movies-selectors";
-import { useSelector } from "react-redux";
-
 import { useKeyPress } from "../../../hooks/useKeyPress";
 
-export const Searcher = ({
-  searchValue,
-  setSearchValue,
-  onSearchMoviesCb,
-  currentPage,
-  setEmptyResult,
-}) => {
+export const Searcher = ({ setSearchValue, onSearchMoviesCb, currentPage }) => {
   const [query, setQuery] = useState("");
   const keyEnter = useKeyPress("Enter");
 

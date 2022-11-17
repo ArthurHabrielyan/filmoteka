@@ -9,6 +9,7 @@ export const LibraryPage = () => {
   const navigate = useNavigate();
   useEffect(() => {
     navigate("/library/watched");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>

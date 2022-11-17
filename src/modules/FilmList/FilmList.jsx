@@ -1,5 +1,11 @@
 import s from "./FilmList.module.css";
 
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+
+import { FilmModal } from "../FilmModal";
+import emptyImg from "../../images/header/img_not_found.jpg";
+import { ModalOfContentNotFound } from "../ModalOfContentNotFound/ModalOfContentNotFound";
 import { genreList } from "../../redux/movies/movies-operations";
 import {
   getGenres,
@@ -7,21 +13,16 @@ import {
   getContent,
   getIsLoading,
 } from "../../redux/movies/movies-selectors";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { FilmModal } from "../FilmModal";
-import emptyImg from "../../images/header/img_not_found.jpg";
-import { ModalOfContentNotFound } from "../ModalOfContentNotFound/ModalOfContentNotFound";
 
-export const FilmList = ({ setSearchValue, emptyResult, setEmptyResult }) => {
+export const FilmList = ({ setEmptyResult }) => {
   const dispatch = useDispatch();
+
   const genres = useSelector(getGenres);
   const movies = useSelector(getMovies);
-  console.log(movies);
   const contentFound = useSelector(getContent);
   const isLoading = useSelector(getIsLoading);
-  const [showModal, setShowModal] = useState(false);
 
+  const [showModal, setShowModal] = useState(false);
   const [currentFilm, setCurrentFilm] = useState(null);
 
   useEffect(() => {

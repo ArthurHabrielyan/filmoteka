@@ -1,8 +1,8 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = "https://api.themoviedb.org/3";
 const API_KEY = "40435ef3acb8f6da32bfa6c21057cf43";
+axios.defaults.baseURL = "https://api.themoviedb.org/3";
 
 export const onPopularMovies = createAsyncThunk(
   "movies/fetchMovies",
@@ -27,7 +27,6 @@ export const onMovieSearch = createAsyncThunk(
       );
 
       if (response.data.results.length === 0) {
-        console.log("Rejected");
         return rejectWithValue(response.status);
       }
       return response;

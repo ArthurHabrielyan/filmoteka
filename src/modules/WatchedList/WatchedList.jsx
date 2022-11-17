@@ -1,18 +1,19 @@
 import s from "./WatchedList.module.css";
 
-import { getWatched } from "../../redux/movies/movies-selectors";
-import { genreList } from "../../redux/movies/movies-operations";
-import { getGenres } from "../../redux/movies/movies-selectors";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { getWatched } from "../../redux/movies/movies-selectors";
+import { genreList } from "../../redux/movies/movies-operations";
+import { getGenres } from "../../redux/movies/movies-selectors";
 import { FilmModal } from "../FilmModal";
 
 export const WatchedList = () => {
-  const watchedFilms = useSelector(getWatched);
-  console.log(watchedFilms);
   const dispatch = useDispatch();
+
   const genres = useSelector(getGenres);
+  const watchedFilms = useSelector(getWatched);
+
   const [showModal, setShowModal] = useState(false);
   const [currentFilm, setCurrentFilm] = useState(null);
   useEffect(() => {

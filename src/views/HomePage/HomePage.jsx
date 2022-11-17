@@ -1,25 +1,28 @@
-import { AppBar } from "../../modules/AppBar";
+import s from "./HomePage.module.css";
+
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useCallback } from "react";
+import ReactPaginate from "react-paginate";
+
 import {
   onPopularMovies,
   onMovieSearch,
 } from "../../redux/movies/movies-operations";
-import { useDispatch, useSelector } from "react-redux";
+import { AppBar } from "../../modules/AppBar";
 import { getMovies, getContent } from "../../redux/movies/movies-selectors";
 import { FilmList } from "../../modules/FilmList";
-import ReactPaginate from "react-paginate";
 
-import s from "./HomePage.module.css";
-import { useCallback } from "react";
 export const HomePage = () => {
+  const dispatch = useDispatch();
+
+  const contentFound = useSelector(getContent);
+  const moviesState = useSelector(getMovies);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
   const [totalPosts, setTotalPosts] = useState(0);
   const [emptyResult, setEmptyResult] = useState(false);
-  console.log(emptyResult);
-  const contentFound = useSelector(getContent);
-  const moviesState = useSelector(getMovies);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(onPopularMovies(currentPage)).then((data) =>
@@ -27,6 +30,7 @@ export const HomePage = () => {
     );
 
     dispatch(onPopularMovies(currentPage));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSearchMoviesCb = useCallback(
@@ -36,10 +40,6 @@ export const HomePage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [currentPage, searchValue]
   );
-
-  // useEffect(() => {
-  //   searchValue && onSearchMoviesCb(currentPage, searchValue);
-  // }, [currentPage, searchValue]);
 
   const handlePageClick = (e) => {
     const selectedPage = e.selected;
