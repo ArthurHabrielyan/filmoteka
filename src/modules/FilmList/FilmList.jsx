@@ -40,7 +40,7 @@ export const FilmList = ({ setEmptyResult }) => {
       setShowModal(true);
       setCurrentFilm(movie);
     };
-
+  console.log(isLoading);
   return (
     <section className={s.gallery}>
       {contentFound && (
@@ -102,8 +102,8 @@ export const FilmList = ({ setEmptyResult }) => {
           )}
         </>
       )}
-      {!isLoading && !contentFound && (
-        <ModalOfContentNotFound setEmptyResult={setEmptyResult} />
+      {!contentFound && !isLoading && (
+        <ModalOfContentNotFound isLoading={isLoading} />
       )}
       {showModal && (
         <FilmModal onDeny={onDeny} movie={currentFilm} genres={genres} />

@@ -8,12 +8,10 @@ import { createPortal } from "react-dom";
 
 const modalRoot = document.querySelector("#modal-root");
 
-export const ModalOfContentNotFound = ({ setEmptyResult }) => {
+export const ModalOfContentNotFound = () => {
   const dispatch = useDispatch();
 
   const handleKeyDown = (e) => {
-    setEmptyResult(false);
-
     if (e.keyCode === 13) {
       onDeny();
       return;
@@ -39,14 +37,17 @@ export const ModalOfContentNotFound = ({ setEmptyResult }) => {
   };
 
   return createPortal(
-    <div className={s.backdrop} onClick={handleBackdropClick}>
-      <div className={s.modal}>
-        <p className={s.textOfModal}>No movies found for this query</p>
-        <button className={s.button} onClick={handleKeyDown}>
-          Ok
-        </button>
+    <>
+      {" "}
+      <div className={s.backdrop} onClick={handleBackdropClick}>
+        <div className={s.modal}>
+          <p className={s.textOfModal}>No movies found for this query</p>
+          <button className={s.button} onClick={handleKeyDown}>
+            Ok
+          </button>
+        </div>
       </div>
-    </div>,
+    </>,
     modalRoot
   );
 };

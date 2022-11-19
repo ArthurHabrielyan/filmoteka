@@ -14,6 +14,7 @@ const initialState = {
       ? JSON.parse(localStorage.getItem("queue"))
       : [],
   contentFound: false,
+  loading: null,
 };
 
 const localStorageService = new LocalStorageService();
@@ -44,12 +45,17 @@ export const moviesReducer = createSlice({
     },
   },
   extraReducers: {
+    [onPopularMovies.pending](state, { payload }) {
+      state.loading = true;
+    },
     [onPopularMovies.fulfilled](state, { payload }) {
+      state.loading = false;
       state.movies = payload.results;
       state.contentFound = true;
     },
     [onPopularMovies.rejected](state, { payload }) {
       state.contentFound = false;
+      state.loading = false;
     },
     [onMovieSearch.pending](state, { payload }) {
       state.loading = true;
