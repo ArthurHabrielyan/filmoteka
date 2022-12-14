@@ -40,7 +40,7 @@ export const FilmList = ({ setEmptyResult }) => {
       setShowModal(true);
       setCurrentFilm(movie);
     };
-  console.log(isLoading);
+
   return (
     <section className={s.gallery}>
       {contentFound && (

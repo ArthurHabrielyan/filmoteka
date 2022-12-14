@@ -10,7 +10,7 @@ export const App = () => {
     <>
       <Routes>
         <Route
-          path="/filmoteka"
+          path="/"
           element={
             <Suspense fallback={<Spinner />}>
               <HomePage />

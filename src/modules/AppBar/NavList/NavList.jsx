@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { Logo } from "../Logo/Logo";
 import s from "./NavList.module.css";
+import { useLocation } from "react-router-dom";
 
 const linkStyle = {
   borderBottom: "none",
@@ -12,6 +13,8 @@ const activeLinkStyle = {
 };
 
 export const NavList = () => {
+  const location = useLocation();
+
   return (
     <nav className={s.nav}>
       <Logo />
@@ -19,8 +22,12 @@ export const NavList = () => {
         <li className={s.listItem}>
           <NavLink
             className={s.listLink}
-            style={({ isActive }) => (isActive ? activeLinkStyle : linkStyle)}
-            to={"/filmoteka"}
+            style={({ isActive }) =>
+              location.pathname === "/" && isActive
+                ? activeLinkStyle
+                : linkStyle
+            }
+            to={"/"}
           >
             Home
           </NavLink>
@@ -29,7 +36,7 @@ export const NavList = () => {
           <NavLink
             className={s.listLink}
             style={({ isActive }) => (isActive ? activeLinkStyle : linkStyle)}
-            to={"/library"}
+            to={"/library/watched"}
           >
             Library
           </NavLink>

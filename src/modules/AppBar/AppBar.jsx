@@ -13,14 +13,10 @@ export const AppBar = ({
   const location = useLocation();
 
   return (
-    <div
-      className={
-        location.pathname === "/filmoteka" ? s.content : s.libraryContent
-      }
-    >
+    <div className={location.pathname === "/" ? s.content : s.libraryContent}>
       <div className={s.container}>
         <NavList />
-        {location.pathname === "/filmoteka" ? (
+        {location.pathname === "/" ? (
           <Searcher
             searchValue={searchValue}
             setSearchValue={setSearchValue}

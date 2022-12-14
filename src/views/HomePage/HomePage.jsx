@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback } from "react";
 import ReactPaginate from "react-paginate";
-
+import { useLocation } from "react-router-dom";
 import {
   onPopularMovies,
   onMovieSearch,
@@ -28,7 +28,6 @@ export const HomePage = () => {
     dispatch(onPopularMovies(currentPage)).then((data) =>
       setTotalPosts(data.payload.total_pages)
     );
-
     dispatch(onPopularMovies(currentPage));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -44,6 +43,9 @@ export const HomePage = () => {
   const handlePageClick = (e) => {
     const selectedPage = e.selected;
     setCurrentPage(selectedPage + 1);
+    searchValue
+      ? onSearchMoviesCb(currentPage, searchValue)
+      : dispatch(onPopularMovies(currentPage));
   };
   const pageCount = Math.ceil(totalPosts / moviesState.length);
 
